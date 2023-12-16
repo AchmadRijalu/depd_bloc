@@ -1,3 +1,4 @@
+import 'package:depd_bloc/UI/views/restaurant_detail_view.dart';
 import 'package:depd_bloc/UI/views/restaurant_list_view.dart';
 import 'package:flutter/material.dart';
 
@@ -14,13 +15,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const RestaurantListView(),
+      initialRoute: RestaurantListView.routeName,
+      routes: {
+        RestaurantListView.routeName: (context) => const RestaurantListView(),
+        RestaurantDetailView.routeName: (context) =>
+            const RestaurantDetailView(id: 0,),
+      },
     );
   }
 }
-
-

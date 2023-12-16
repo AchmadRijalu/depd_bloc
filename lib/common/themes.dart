@@ -2,6 +2,7 @@ part of 'common.dart';
 
 
 Color yellowColor = const Color(0XFFF4CE14);
+Color blueColor = const Color(0xff362FD9);
 Color whiteColor = const Color(0xffFFFFFF);
 Color blackColor = const Color(0xff14193F);
 Color greyColor = const Color(0xffA4A8AE);
@@ -10,6 +11,7 @@ Color lightBackgroundColor = const Color(0xffF6F8FB);
 Color darkBackgroundColor = const Color(0xff0F0F0F);
 
 TextStyle blackTextStyle = GoogleFonts.rubik(color: blackColor);
+TextStyle blueTextStyle = GoogleFonts.rubik(color: blueColor);
 TextStyle whiteTextStyle = GoogleFonts.rubik(color: whiteColor);
 TextStyle redTextStyle = GoogleFonts.rubik(color: redColor);
 TextStyle greyTextStyle = GoogleFonts.poppins(color: greyColor);
