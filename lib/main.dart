@@ -1,5 +1,6 @@
 import 'package:depd_bloc/UI/views/restaurant_detail_view.dart';
 import 'package:depd_bloc/UI/views/restaurant_list_view.dart';
+import 'package:depd_bloc/models/restaurant_model.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -21,8 +22,7 @@ class MyApp extends StatelessWidget {
       initialRoute: RestaurantListView.routeName,
       routes: {
         RestaurantListView.routeName: (context) => const RestaurantListView(),
-        RestaurantDetailView.routeName: (context) =>
-            const RestaurantDetailView(id: 0,),
+        
       },
     );
   }

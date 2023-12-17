@@ -17,6 +17,7 @@ class RestaurantListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     RestaurantRepository restaurantRepository = RestaurantRepository();
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -32,7 +33,7 @@ class RestaurantListView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -51,25 +52,27 @@ class RestaurantListView extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Stack(
-                              clipBehavior: Clip.none,
-                              children: [
-                                Positioned(
-                                  child: CupertinoTextField(),
-                                )
-                              ],
-                            ),
-                          )
+
+                          //MARK: Search Bar Start Here
+                          // Container(
+                          //   padding: const EdgeInsets.symmetric(horizontal: 12),
+                          //   child: Stack(
+                          //     clipBehavior: Clip.none,
+                          //     children: [
+                          //       Positioned(
+                          //         child: CupertinoTextField(),
+                          //       )
+                          //     ],
+                          //   ),
+                          // )
                         ]),
                   )),
                   Expanded(
                       flex: 5,
                       child: Container(
                         padding:
-                            const EdgeInsets.only(left: 12, right: 12, top: 48),
-                        color: whiteColor,
+                            const EdgeInsets.only(left: 12, right: 12, top: 36),
+                        color: lightBackgroundColor,
                         child: Column(children: [
                           Row(
                             children: [
@@ -104,9 +107,13 @@ class RestaurantListView extends StatelessWidget {
                                           restaurantModel.restaurants[index];
                                       return RestaurantListItem(
                                           onTap: () {
-                                            Navigator.pushNamed(context,
-                                                RestaurantDetailView.routeName,
-                                                arguments: restaurant.id);
+                                            Navigator.push(context,
+                                                MaterialPageRoute(
+                                                    builder: (context) {
+                                              return RestaurantDetailView(
+                                                restaurant: restaurant,
+                                              );
+                                            }));
                                           },
                                           imageUrl: restaurant.pictureId,
                                           name: restaurant.name,

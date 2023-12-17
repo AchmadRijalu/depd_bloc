@@ -23,8 +23,11 @@ class RestaurantListItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
         width: double.infinity,
         height: 100,
+        decoration: BoxDecoration(
+            color: whiteColor, borderRadius: BorderRadius.circular(12)),
         padding: const EdgeInsets.all(8),
         child: Row(
           children: [

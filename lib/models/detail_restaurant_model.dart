@@ -1,64 +1,151 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'dart:convert';
 
-part 'detail_restaurant_model.freezed.dart';
-part 'detail_restaurant_model.g.dart';
+DetailRestaurantModel detailRestaurantModelFromJson(String str) =>
+    DetailRestaurantModel.fromJson(json.decode(str));
 
-@freezed
-class DetailRestaurantModel with _$DetailRestaurantModel {
-  const factory DetailRestaurantModel({
-    required bool error,
-    required String message,
-    required Restaurant restaurant,
-  }) = _DetailRestaurantModel;
+String detailRestaurantModelToJson(DetailRestaurantModel data) =>
+    json.encode(data.toJson());
+
+class DetailRestaurantModel {
+  bool error;
+  String message;
+  DetailRestaurant restaurant;
+
+  DetailRestaurantModel({
+    required this.error,
+    required this.message,
+    required this.restaurant,
+  });
 
   factory DetailRestaurantModel.fromJson(Map<String, dynamic> json) =>
-      _$DetailRestaurantModelFromJson(json);
+      DetailRestaurantModel(
+        error: json["error"],
+        message: json["message"],
+        restaurant: DetailRestaurant.fromJson(json["restaurant"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "error": error,
+        "message": message,
+        "restaurant": restaurant.toJson(),
+      };
 }
 
-@freezed
-class Restaurant with _$Restaurant {
-  const factory Restaurant({
-    required String id,
-    required String name,
-    required String description,
-    required String city,
-    required String address,
-    required String pictureID,
-    required List<Category> categories,
-    required Menus menus,
-    required double rating,
-    required List<CustomerReview> customerReviews,
-  }) = _Restaurant;
+class DetailRestaurant {
+  String id;
+  String name;
+  String description;
+  String city;
+  String address;
+  String pictureId;
+  List<Category> categories;
+  Menus menus;
+  double rating;
+  List<CustomerReview> customerReviews;
 
-  factory Restaurant.fromJson(Map<String, dynamic> json) => _$RestaurantFromJson(json);
+  DetailRestaurant({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.city,
+    required this.address,
+    required this.pictureId,
+    required this.categories,
+    required this.menus,
+    required this.rating,
+    required this.customerReviews,
+  });
+
+  factory DetailRestaurant.fromJson(Map<String, dynamic> json) =>
+      DetailRestaurant(
+        id: json["id"],
+        name: json["name"],
+        description: json["description"],
+        city: json["city"],
+        address: json["address"],
+        pictureId: json["pictureId"],
+        categories: List<Category>.from(
+            json["categories"].map((x) => Category.fromJson(x))),
+        menus: Menus.fromJson(json["menus"]),
+        rating: json["rating"]?.toDouble(),
+        customerReviews: List<CustomerReview>.from(
+            json["customerReviews"].map((x) => CustomerReview.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "description": description,
+        "city": city,
+        "address": address,
+        "pictureId": pictureId,
+        "categories": List<dynamic>.from(categories.map((x) => x.toJson())),
+        "menus": menus.toJson(),
+        "rating": rating,
+        "customerReviews":
+            List<dynamic>.from(customerReviews.map((x) => x.toJson())),
+      };
 }
 
-@freezed
-class Category with _$Category {
-  const factory Category({
-    required String name,
-  }) = _Category;
+class Category {
+  String name;
 
-  factory Category.fromJson(Map<String, dynamic> json) => _$CategoryFromJson(json);
+  Category({
+    required this.name,
+  });
+
+  factory Category.fromJson(Map<String, dynamic> json) => Category(
+        name: json["name"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+      };
 }
 
-@freezed
-class CustomerReview with _$CustomerReview {
-  const factory CustomerReview({
-    required String name,
-    required String review,
-    required String date,
-  }) = _CustomerReview;
+class CustomerReview {
+  String name;
+  String review;
+  String date;
 
-  factory CustomerReview.fromJson(Map<String, dynamic> json) => _$CustomerReviewFromJson(json);
+  CustomerReview({
+    required this.name,
+    required this.review,
+    required this.date,
+  });
+
+  factory CustomerReview.fromJson(Map<String, dynamic> json) => CustomerReview(
+        name: json["name"],
+        review: json["review"],
+        date: json["date"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "review": review,
+        "date": date,
+      };
 }
 
-@freezed
-class Menus with _$Menus {
-  const factory Menus({
-    required List<Category> foods,
-    required List<Category> drinks,
-  }) = _Menus;
+class Menus {
+  List<Category> foods;
+  List<Category> drinks;
 
-  factory Menus.fromJson(Map<String, dynamic> json) => _$MenusFromJson(json);
+  Menus({
+    required this.foods,
+    required this.drinks,
+  });
+
+  factory Menus.fromJson(Map<String, dynamic> json) => Menus(
+        foods:
+            List<Category>.from(json["foods"].map((x) => Category.fromJson(x))),
+        drinks: List<Category>.from(
+            json["drinks"].map((x) => Category.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "foods": List<dynamic>.from(foods.map((x) => x.toJson())),
+        "drinks": List<dynamic>.from(drinks.map((x) => x.toJson())),
+      };
 }
