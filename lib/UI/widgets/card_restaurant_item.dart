@@ -13,7 +13,6 @@ class CardDetailsRestaurant extends StatelessWidget {
       decoration: BoxDecoration(
         color: yellowColor,
         borderRadius: BorderRadius.circular(10),
-        // color: Colors.black,
       ),
       child: Text(
         foodName,

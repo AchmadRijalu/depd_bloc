@@ -1,18 +1,18 @@
 
-class RestaurantModelGenerator {
+class RestaurantModel {
     bool error;
     String message;
     int count;
     List<Restaurant> restaurants;
 
-    RestaurantModelGenerator({
+    RestaurantModel({
         required this.error,
         required this.message,
         required this.count,
         required this.restaurants,
     });
 
-    factory RestaurantModelGenerator.fromJson(Map<String, dynamic> json) => RestaurantModelGenerator(
+    factory RestaurantModel.fromJson(Map<String, dynamic> json) => RestaurantModel(
         error: json["error"],
         message: json["message"],
         count: json["count"],
