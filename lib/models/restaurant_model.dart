@@ -1,8 +1,4 @@
 
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-
-
 class RestaurantModelGenerator {
     bool error;
     String message;

@@ -42,8 +42,7 @@ class RestaurantDetailView extends StatelessWidget {
                       image: DecorationImage(
                           fit: BoxFit.cover,
                           image: NetworkImage(
-                              "https://restaurant-api.dicoding.dev/images/large/" +
-                                  detailRestaurantModel.restaurant.pictureId))),
+                              "https://restaurant-api.dicoding.dev/images/large/${detailRestaurantModel.restaurant.pictureId}"))),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(12),
@@ -54,7 +53,7 @@ class RestaurantDetailView extends StatelessWidget {
                           Expanded(
                             flex: 4,
                             child: Text(
-                              "${detailRestaurantModel.restaurant.name}",
+                              detailRestaurantModel.restaurant.name,
                               style: Theme.of(context)!
                                   .textTheme
                                   .titleMedium!
@@ -66,21 +65,19 @@ class RestaurantDetailView extends StatelessWidget {
                             ),
                           ),
                           Flexible(
-                              child: Container(
-                            child: Row(children: [
-                              Icon(
-                                Icons.star_half_rounded,
-                                color: redColor,
-                              ),
-                              Text(
-                                "${detailRestaurantModel.restaurant.rating.toString()}",
-                                style: TextStyle(color: blackColor),
-                              )
-                            ]),
-                          ))
+                              child: Row(children: [
+                                Icon(
+                                  Icons.star_half_rounded,
+                                  color: redColor,
+                                ),
+                                Text(
+                                  detailRestaurantModel.restaurant.rating.toString(),
+                                  style: TextStyle(color: blackColor),
+                                )
+                              ]))
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Row(
@@ -94,15 +91,13 @@ class RestaurantDetailView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
                           Expanded(
                               flex: 5,
                               child: Text(
-                                "${detailRestaurantModel.restaurant.address}" +
-                                    ", " +
-                                    "${detailRestaurantModel.restaurant.city}",
+                                "${detailRestaurantModel.restaurant.address}, ${detailRestaurantModel.restaurant.city}",
                                 style: Theme.of(context)!
                                     .textTheme
                                     .titleMedium
@@ -112,47 +107,43 @@ class RestaurantDetailView extends StatelessWidget {
                               )),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 35,
                       ),
-                      Container(
-                        child: Column(children: [
-                          Row(
-                            children: [
-                              Text(
-                                "About",
-                                style: Theme.of(context)!
-                                    .textTheme
-                                    .titleMedium!
-                                    .copyWith(
-                                        fontWeight: FontWeight.w800,
-                                        color: blackColor,
-                                        fontSize: 25),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          Wrap(
-                            children: [
-                              Container(
-                                child: Text(
-                                  "${detailRestaurantModel.restaurant.description}",
-                                  style: Theme.of(context)!
-                                      .textTheme
-                                      .subtitle2!
-                                      .copyWith(color: blackColor),
-                                ),
-                              )
-                            ],
-                          )
-                        ]),
-                      ),
-                      SizedBox(
+                      Column(children: [
+                        Row(
+                          children: [
+                            Text(
+                              "About",
+                              style: Theme.of(context)!
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(
+                                      fontWeight: FontWeight.w800,
+                                      color: blackColor,
+                                      fontSize: 25),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Wrap(
+                          children: [
+                            Text(
+                              detailRestaurantModel.restaurant.description,
+                              style: Theme.of(context)!
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(color: blackColor),
+                            )
+                          ],
+                        )
+                      ]),
+                      const SizedBox(
                         height: 24,
                       ),
-                      Container(
+                      SizedBox(
                           width: double.infinity,
                           height: 40,
 
@@ -169,52 +160,50 @@ class RestaurantDetailView extends StatelessWidget {
                                 height: double.infinity,
                                 child: Text(
                                   " Categories: ",
-                                  style: Theme.of(context)!
+                                  style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge!
                                       .copyWith(color: blackColor),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 12,
                               ),
-                              Container(
-                                child: Flexible(
-                                  child: ListView.builder(
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: detailRestaurantModel
-                                        .restaurant.categories.length,
-                                    // scrollDirection: Axis.horizontal,
-                                    itemBuilder: ((context, index) {
-                                      final Category restCategories =
-                                          detailRestaurantModel
-                                              .restaurant.categories[index];
-                                      return Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                            color: Colors.amber,
-                                          ),
-                                          margin:
-                                              const EdgeInsets.only(right: 10),
-                                          padding: const EdgeInsets.all(8),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                restCategories.name,
-                                                style: Theme.of(context)!
-                                                    .textTheme
-                                                    .subtitle2!
-                                                    .copyWith(
-                                                        color: blackColor,
-                                                        fontWeight:
-                                                            FontWeight.w600),
-                                              ),
-                                            ],
-                                          ));
-                                    }),
-                                  ),
+                              Flexible(
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: detailRestaurantModel
+                                      .restaurant.categories.length,
+                                  // scrollDirection: Axis.horizontal,
+                                  itemBuilder: ((context, index) {
+                                    final Category restCategories =
+                                        detailRestaurantModel
+                                            .restaurant.categories[index];
+                                    return Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          color: Colors.amber,
+                                        ),
+                                        margin:
+                                            const EdgeInsets.only(right: 10),
+                                        padding: const EdgeInsets.all(8),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              restCategories.name,
+                                              style: Theme.of(context)!
+                                                  .textTheme
+                                                  .titleSmall!
+                                                  .copyWith(
+                                                      color: blackColor,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                            ),
+                                          ],
+                                        ));
+                                  }),
                                 ),
                               ),
                             ],
@@ -232,7 +221,7 @@ class RestaurantDetailView extends StatelessWidget {
                                   fontWeight: FontWeight.w700),
                         ),
                       ),
-                      Container(
+                      SizedBox(
                           height: 50,
                           width: double.infinity,
                           child: Column(
@@ -246,22 +235,20 @@ class RestaurantDetailView extends StatelessWidget {
                                       itemBuilder: ((context, index) {
                                         var menus = detailRestaurantModel
                                             .restaurant.menus.foods[index];
-                                        return Container(
-                                          child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                CardDetailsRestaurant(
-                                                    foodName: menus.name),
-                                              ]),
-                                        );
+                                        return Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              CardDetailsRestaurant(
+                                                  foodName: menus.name),
+                                            ]);
                                       }))),
                             ],
                           )),
                       const SizedBox(
                         height: 36,
                       ),
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         child: Text(
                           "Beverages : ",
@@ -273,7 +260,7 @@ class RestaurantDetailView extends StatelessWidget {
                                   fontWeight: FontWeight.w700),
                         ),
                       ),
-                      Container(
+                      SizedBox(
                           height: 50,
                           width: double.infinity,
                           child: Column(
@@ -287,19 +274,17 @@ class RestaurantDetailView extends StatelessWidget {
                                       itemBuilder: ((context, index) {
                                         var menus = detailRestaurantModel
                                             .restaurant.menus.drinks[index];
-                                        return Container(
-                                          child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                CardDetailsRestaurant(
-                                                    foodName: menus.name),
-                                              ]),
-                                        );
+                                        return Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              CardDetailsRestaurant(
+                                                  foodName: menus.name),
+                                            ]);
                                       }))),
                             ],
                           )),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                     ],
