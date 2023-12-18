@@ -35,8 +35,7 @@ class RestaurantListItem extends StatelessWidget {
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.network(
-                      "https://restaurant-api.dicoding.dev/images/medium/${imageUrl}" ??
-                          "assets/images/image_person.jpeg",
+                      "https://restaurant-api.dicoding.dev/images/medium/$imageUrl",
                       fit: BoxFit.fill,
                     ))),
             const SizedBox(
@@ -44,52 +43,47 @@ class RestaurantListItem extends StatelessWidget {
             ),
             Expanded(
               flex: 4,
-              child: Container(
-                // color: Colors.red,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        name ?? "Restaurant Name",
+                        style: blackTextStyle.copyWith(
+                            fontWeight: medium, fontSize: 14),
+                      ),
+                      Row(children: [
+                        Icon(Icons.star_half, color: redColor),
+                        const Gap(2),
                         Text(
-                          "${name ?? "Restaurant Name"}",
+                          "${rating ?? 0}",
                           style: blackTextStyle.copyWith(
                               fontWeight: medium, fontSize: 14),
                         ),
-                        Container(
-                          child: Row(children: [
-                            Icon(Icons.star_half, color: redColor),
-                            Gap(2),
-                            Text(
-                              "${rating ?? 0}",
-                              style: blackTextStyle.copyWith(
-                                  fontWeight: medium, fontSize: 14),
-                            ),
-                          ]),
-                        )
-                      ],
+                      ])
+                    ],
+                  ),
+                  Column(children: [
+                    Text(
+                      description ?? "Restaurant Description",
+                      style: greyTextStyle.copyWith(
+                          fontWeight: light, fontSize: 10),
+                      maxLines:
+                          3, // Adjust the number of lines you want to display
+                      overflow: TextOverflow
+                          .ellipsis, // Show ellipsis (...) for overflow
                     ),
-                    Column(children: [
-                      Text(
-                        "${description ?? "Restaurant Description"}",
-                        style: greyTextStyle.copyWith(
-                            fontWeight: light, fontSize: 10),
-                        maxLines:
-                            3, // Adjust the number of lines you want to display
-                        overflow: TextOverflow
-                            .ellipsis, // Show ellipsis (...) for overflow
-                      ),
-                    ]),
-                    Row(
-                      children: [
-                        Text("${city ?? "Restaurant City"}",
-                            style: blueTextStyle.copyWith(
-                                fontWeight: bold, fontSize: 12)),
-                      ],
-                    )
-                  ],
-                ),
+                  ]),
+                  Row(
+                    children: [
+                      Text(city ?? "Restaurant City",
+                          style: blueTextStyle.copyWith(
+                              fontWeight: bold, fontSize: 12)),
+                    ],
+                  )
+                ],
               ),
             )
           ],
